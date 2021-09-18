@@ -13,6 +13,10 @@ pcp_all_dat = read_csv( here( "Data", "PCP_sample.csv" ) )
 
 pcp_all_dat %>% glimpse()
 
+pcp_all_dat %>% 
+  group_by( pcp_id ) %>%
+  summarise( n_time = n_distinct( time )  )
+
 
 # Model 1: One PCP: Different UDCs --------
 
@@ -74,7 +78,7 @@ plot( model_1a )
 
 
 
-## Model: separate time trends, Poisson UDCs ---------
+## Model: separate time trends, Poisson UDC ---------
 
 
 model_1b = inla( formula,
@@ -122,7 +126,7 @@ model_1c$dic$dic
 # Model 2: One PCP: common vs separate Time Trends --------
 
 
-#### Separate Time Trends
+#### Model: Separate Time Trends
 
 formula = Y ~ -1 + detailing_focal +
   f( r_index_copy, model="iid" )+
@@ -144,7 +148,7 @@ summary( model_2a )
 plot( model_2a )
 
 
-#### Common (Shared) Time Trend
+#### Model: Common (Shared) Time Trend
 
 formula = Y ~ -1 + detailing_focal +
   f( r_index_copy, model="iid" )+
