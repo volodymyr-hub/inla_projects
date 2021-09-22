@@ -25,7 +25,7 @@ pcp_all_dat %>%
 #### select PCP #######
 
 pcp_dat = pcp_all_dat %>%
-  filter( pcp_id == 1178 ) 
+  filter( pcp_id == "0001" ) 
 
 pcp_dat %>%
   print( n = Inf )
